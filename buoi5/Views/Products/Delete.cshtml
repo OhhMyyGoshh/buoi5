@@ -1,0 +1,80 @@
+﻿@model buoi5.Models.Product
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Xóa sản phẩm</h2>
+
+<h3>Bạn có chắc chắn là xóa sản phẩm này?</h3>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <div class="control-label col-md-2">
+                <b>Tên sản phẩm</b>
+            </div>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NamePro)
+        </dd>
+
+        <dt>
+            <div class="control-label col-md-2">
+                <b>Mô tả</b>
+            </div>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DecriptionPro)
+        </dd>
+
+        <dt>
+            <div class="control-label col-md-2">
+                <b>Đơn giá</b>
+            </div>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            <div class="control-label col-md-2">
+                <b>Hình</b>
+            </div>
+        </dt>
+
+        <dd>
+            <img src="~/Content/images/@Model.ImagePro" width="200" height="200" />
+            @Html.DisplayFor(model => model.ImagePro)
+        </dd>
+
+        <dt>
+            <div class="control-label col-md-2">
+                <b>Loại sản phẩm</b>
+            </div>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.NameCate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-primary" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

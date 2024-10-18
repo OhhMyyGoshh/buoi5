@@ -1,0 +1,80 @@
+﻿@model buoi5.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi tiết</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <div class="control-label col-md-2">
+                <b>Đơn giá</b>
+            </div>
+
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NamePro)
+        </dd>
+
+        <dt>
+            <div class="control-label col-md-2">
+                <b>Đơn giá</b>
+            </div>
+
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DecriptionPro)
+        </dd>
+
+        <dt>
+            <div class="control-label col-md-2">
+                <b>Đơn giá</b>
+            </div>
+
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            <div class="control-label col-md-2">
+                <b>Đơn giá</b>
+            </div>
+
+        </dt>
+        <div class="control-label col-md-2">
+            <b>Hình</b>
+            <img src="~/Content/images/@Model.ImagePro" width="200" height="200" />
+            @Html.ValidationMessageFor(model => model.ImagePro, "", new { @class = "text-danger" })
+        </div>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ImagePro)
+            </dd>
+
+            <dt>
+                <div class="control-label col-md-2">
+                    <b>Đơn giá</b>
+                </div>
+
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Category.NameCate)
+            </dd>
+
+
+</dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
