@@ -12,40 +12,32 @@
 
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            <div class="control-label col-md-2">
-                <b>Tên sản phẩm</b>
-            </div>
+        <dt class="control-label col-md-2">
+            <b>Tên Sản Phẩm</b>
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.NamePro)
         </dd>
 
-        <dt>
-            <div class="control-label col-md-2">
-                <b>Mô tả</b>
-            </div>
+        <dt class="control-label col-md-2">
+            <b>Mô Tả</b>
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.DecriptionPro)
         </dd>
 
-        <dt>
-            <div class="control-label col-md-2">
-                <b>Đơn giá</b>
-            </div>
+        <dt class="control-label col-md-2">
+            <b>Giá</b>
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Price)
         </dd>
 
-        <dt>
-            <div class="control-label col-md-2">
-                <b>Hình</b>
-            </div>
+        <dt class="control-label col-md-2">
+            <b>Hình</b>
         </dt>
 
         <dd>
@@ -53,10 +45,8 @@
             @Html.DisplayFor(model => model.ImagePro)
         </dd>
 
-        <dt>
-            <div class="control-label col-md-2">
-                <b>Loại sản phẩm</b>
-            </div>
+        <dt class="control-label col-md-2">
+            <b>Loại Sản Phẩm</b>
         </dt>
 
         <dd>
@@ -70,7 +60,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-primary" /> |
+            <input type="submit" value="Delete" class="btn btn-primary" style="background-color: red" /> 
             @Html.ActionLink("Back to List", "Index")
         </div>
     }

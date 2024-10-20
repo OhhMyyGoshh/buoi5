@@ -12,7 +12,7 @@ namespace buoi5.Controllers
 {
     public class CategoriesController : Controller
     {
-        private DBSportStoreEntities db = new DBSportStoreEntities();
+        private readonly DBSportStoreEntities db = new DBSportStoreEntities();
 
         // GET: Categories
         public ActionResult Index()
@@ -102,6 +102,14 @@ namespace buoi5.Controllers
                 return HttpNotFound();
             }
             return View(category);
+        }
+
+        // Partial view action
+        [ChildActionOnly] // Optional to prevent direct access
+        public ActionResult CategoryPartial()
+        {
+            var categories = db.Categories.ToList();
+            return PartialView(categories);
         }
 
         // POST: Categories/Delete/5

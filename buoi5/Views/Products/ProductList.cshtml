@@ -1,0 +1,105 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<buoi5.Models.Product>
+@{
+    ViewBag.Title = "Muahang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <h2>MUA HÀNG</h2>
+    <div style="border: 3px solid #ff6a00; height: 70px; text-align: center; padding: 15px;">
+        <!-- Đoạn thêm -->
+        @using (Html.BeginForm("ProductList", "Products", FormMethod.Get))
+        {
+            <table>
+                <tr>
+                    <td>
+                        Tên Sản phẩm : <input type="text" name="SearchString" />
+                        <input type="submit" value="Tìm kiếm" class="btn btn-warning" />
+                    </td>
+                    <td>
+                        Đơn giá từ : <input type="number" name="min" />
+                        --đến : <input type="number" name="max" />
+                        <input type="submit" value="Tìm giá" class="btn btn-warning" />
+                    </td>
+                </tr>
+            </table>
+        }
+        <!--Kết thúc -->
+    </div>
+    <div class="row">
+        @foreach (var pro in Model)
+        {
+            <div class="col-sm-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card-pro">
+                    <p>@Html.DisplayFor(model => pro.ProductID)</p>
+                    <img src="~/Content/images/@pro.ImagePro" width="200" height="250" />
+                    <p>@Html.DisplayFor(model => pro.NamePro)</p>
+                    <p>Đơn giá : <font color="red">@Html.DisplayFor(model => pro.Price)</font></p>
+                    <p style="text-align: center;">
+                        <a class="btn btn-info" href="/Products/Details/@pro.ProductID"> Chi tiết </a>
+                        <input type="submit" value="Mua" class="btn btn-danger" />
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<style>
+    /* tạo kiểu cho phần phân trang */
+    .pagination {
+        display: flex; /* sử dụng flexbox để căn giữa */
+        justify-content: center; /* căn giữa */
+        margin: 20px 0; /* khoảng cách trên và dưới */
+        list-style: none; /* bỏ dấu chấm trước mỗi trang */
+        padding: 0; /* bỏ khoảng cách mặc định */
+    }
+
+        /* tạo kiểu cho mỗi nút phân trang */
+        .pagination li {
+            margin: 0 5px; /* khoảng cách giữa các nút */
+        }
+
+            /* tạo kiểu cho liên kết trong các nút */
+            .pagination li a {
+                color: #007bff; /* màu chữ */
+                padding: 10px 15px; /* khoảng cách bên trong nút */
+                border: 1px solid #007bff; /* viền nút */
+                border-radius: 5px; /* bo góc */
+                text-decoration: none; /* bỏ gạch chân */
+                transition: background-color 0.3s, color 0.3s; /* hiệu ứng chuyển động */
+            }
+
+            /* tạo kiểu cho trang hiện tại */
+            .pagination li.active a {
+                background-color: #007bff; /* màu nền cho trang hiện tại */
+                color: white; /* màu chữ cho trang hiện tại */
+            }
+
+            /* hiệu ứng khi hover lên các nút */
+            .pagination li a:hover {
+                background-color: #0056b3; /* màu nền khi hover */
+                color: white; /* màu chữ khi hover */
+            }
+
+    /* tạo kiểu cho phần số trang */
+    .page-info {
+        text-align: center; /* căn giữa nội dung */
+        margin: 20px 0; /* khoảng cách trên và dưới */
+        font-weight: bold; /* làm đậm chữ */
+    }
+</style>
+
+
+
+<!-- Hiển thị số trang và số trang hiện tại -->
+<div class="page-info text-center my-4">
+    <span>Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount</span>
+</div>
+
+<!-- Control PagedListPager -->
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        @Html.PagedListPager(Model, page => Url.Action("ProductList", new { page }))
+    </ul>
+</nav>
+

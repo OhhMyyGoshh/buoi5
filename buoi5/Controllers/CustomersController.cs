@@ -12,7 +12,7 @@ namespace buoi5.Controllers
 {
     public class CustomersController : Controller
     {
-        private DBSportStoreEntities db = new DBSportStoreEntities();
+        private readonly DBSportStoreEntities db = new DBSportStoreEntities();
 
         // GET: Customers
         public ActionResult Index()

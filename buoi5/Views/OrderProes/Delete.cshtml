@@ -5,31 +5,31 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
+<h2>Xóa Đơn Hàng</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Bạn chắc chắn muốn xóa đơn hàng này chứ</h3>
 <div>
-    <h4>OrderPro</h4>
+
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DateOrder)
+        <dt class="control-label col-md-2">
+            <b>Ngày Đặt Hàng</b>
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.DateOrder)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AddressDeliverry)
+        <dt class="control-label col-md-2">
+            <b>Địa chỉ Giao Hàng</b>
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.AddressDeliverry)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Customer.NameCus)
+        <dt class="control-label col-md-2">
+            <b>Khách Hàng</b>
         </dt>
 
         <dd>
@@ -42,7 +42,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="btn btn-default" style="background-color:red"/> |
             @Html.ActionLink("Back to List", "Index")
         </div>
     }

@@ -7,12 +7,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using buoi5.Models;
+using PagedList;
 
 namespace buoi5.Controllers
 {
     public class ProductsController : Controller
     {
-        private DBSportStoreEntities db = new DBSportStoreEntities();
+        private readonly DBSportStoreEntities db = new DBSportStoreEntities();
 
         // GET: Products
         public ActionResult Index()
@@ -120,6 +121,46 @@ namespace buoi5.Controllers
             return RedirectToAction("Index");
         }
 
+
+
+
+        // GET: Products
+        public ActionResult ProductList(int? category, int? page, string SearchString, double min = double.MinValue, double max = double.MaxValue)
+        { // Tạo bộ mẫu tin Products và có tham chiếu đến Category
+            var products = db.Products.Include(p => p.Category);
+            // Tìm kiếm chuỗi truy vấn theo category
+            if (category == null)
+            {
+                products = db.Products.OrderByDescending(x => x.NamePro);
+            }
+            else
+            {
+                products = db.Products.OrderByDescending(x => x.CateID).Where(x => x.CateID ==
+               category);
+            }
+            //Tìm kiếm chuỗi truy vấn theo NamePro, nếu chuỗi truy vấn SearchString khác rỗng, null
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                products = products.Where(s => s.NamePro.Contains(SearchString));
+            }
+            // Tìm kiếm chuỗi truy vấn theo đơn giá
+            if (min >= 0 && max > 0)
+            {
+                products = db.Products.OrderByDescending(x => x.Price).Where(p =>
+               (double)p.Price >= min && (double)p.Price <= max);
+            }
+            // Khai báo mỗi trang 4 sản phẩm
+            int pageSize = 4;
+            // Toán tử ?? trong C# mô tả nếu page khác null thì lấy giá trị page, còn
+            // nếu page = null thì lấy giá trị 1 cho biến pageNumber.
+            int pageNumber = (page ?? 1);
+            // Nếu page = null thì đặt lại page là 1.
+            if (page == null) page = 1;
+            // Trả về các product được phân trang theo kích thước và số trang.
+            return View(products.ToPagedList(pageNumber, pageSize));
+            //// Trả về view với nguồn dữ liệu đã định nghĩa
+            //return View(products.ToList());
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -128,5 +169,6 @@ namespace buoi5.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }
