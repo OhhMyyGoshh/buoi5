@@ -92,13 +92,13 @@
 
 
 <!-- Hiển thị số trang và số trang hiện tại -->
-<div class="page-info text-center my-4">
-    <span>Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount</span>
+<div class="page-info my-4" style="text-align: left;">
+    <span>Trang @((Model.PageNumber > Model.PageCount) ? 0 : Model.PageNumber) / @Model.PageCount</span>
 </div>
 
 <!-- Control PagedListPager -->
 <nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center">
+    <ul class="pagination" style="justify-content: flex-start; padding-left: 0;">
         @Html.PagedListPager(Model, page => Url.Action("ProductList", new { page }))
     </ul>
 </nav>
